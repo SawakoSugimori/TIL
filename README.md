@@ -1,2 +1,2 @@
 # TIL
-日々の勉強記録
+Records of what I've learned today.
