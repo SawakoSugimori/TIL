@@ -1,0 +1,93 @@
+# What I learned today
+I learned SQL today in CS50.  
+
+Notes of SQL. 
+
+<Selecting>
+sqlite3 file_name
+Select everyting on the table
+    sqlite> SELECT * FROM table_name;
+Select one column
+    sqlite> SELECT column_name FROM table_name;
+Select one column which house is house
+    sqlite> SELECT column_name FROM table_name WHERE house = "Slytherin";
+
+LIKE
+Like is not case sensitive
+Search names that are end with Potter
+    sqlite> SELECT column_name FROM table_name WHERE student_name LIKE "%Potter";
+
+
+<Ordering> 
+Sort by alphabeticl order
+SELECT *
+FROM students
+ORDER BY student_name (ASC(defult)/DESC);
+
+Sort the student data in alphabetical order, first by house and then by student name.
+SELECT * FROM students
+ORDER BY house, student_name;
+
+
+<Limiting> 
+Show first 10 name alphametically
+SELECT *
+FROM students
+ORDER BY student_name
+LIMIT 10;
+
+Show last 10 name alphametically
+SELECT *
+FROM students
+ORDER BY student_name DESC
+LIMIT 10;
+
+
+<Aggregating>
+Count the number of students
+SELECT COUNT (*) as  number_of_students
+FROM students;
+
+GROUP BY
+Group the number of student in each house
+SELECT house, COUNT(*) FROM students
+GROUP BY house;
+
+
+<Design Principles>
+- Each table should be a collection of a single entity.
+Primary key is an unique id inside of the table.
+Foreign key is a reference to that primary key from another separate table.
+
+CREATE TABLE houses (
+    id INTEGER NOT NULL,
+    house TEXT NOT NULL,
+    head TEXT NOT NULL,
+    PRIMARY KEY(id)
+);
+
+Insert data to houses table
+INSERT INTO tablename (column1, column2)
+VALUES (value1, value2);
+
+SELECT COUNT(student_id)
+FROM assignments
+WHERE house_id =
+(
+    SLECT id
+    FROM houses
+    WHERE house = "Gryfgindor"
+)
+
+
+<JOIN>
+SELECT *
+FROM assignments
+JOIN houses
+ON assignments.house_id = house.id;
+
+Make a bigger table and count the number of students living in Gryffindor.
+SELECT COUNT(student_id)
+FROM assignments
+JOIN houses ON assignments.house_id = house.id
+WHERE houses.house = 'Gryffindor';
